@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+    php:
+        container_name: docker-php
+        build: ./docker_images/php
+        volumes:
+            - ./:/var/www
+            - phpsocket:/var/run
+        links:
+            - nginx:wms.local
+        networks:
+            - local-network
+
+    nginx:
+        container_name: docker-nginx
+        build: ./docker_images/nginx
+        ports:
+            - 127.0.0.1:80:80
+            - 443:443
+        volumes:
+            - ./:/var/www
+            - ./.docker/local/logs/nginx:/var/log/nginx
+            - ./.docker/local/images/nginx/conf.d:/etc/nginx/conf.d
+            - phpsocket:/var/run
+        networks:
+            - local-network
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+networks:
+    local-network:
+        name: local-network
+        driver: bridge
+
+volumes:
+    phpsocket:
