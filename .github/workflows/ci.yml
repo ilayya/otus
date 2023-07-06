@@ -12,7 +12,10 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
-
+      - name: Install composer
+        run: |
+          curl -sS https://getcomposer.org/installer | php
+          mv composer.phar /usr/local/bin/composer
       - name: Install composer dependencies
         run: |
           composer install --prefer-dist --no-scripts -q -o;
