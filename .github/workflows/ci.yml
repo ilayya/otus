@@ -9,10 +9,10 @@ jobs:
       image: php:8.1-apache
 
     steps:
-      - uses: php-actions/composer@v6
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
+      - uses: php-actions/composer@v6
       - name: Install composer dependencies
         run: |
           composer install --prefer-dist --no-scripts -q -o;
