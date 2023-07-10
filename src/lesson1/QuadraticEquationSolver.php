@@ -15,6 +15,10 @@ class QuadraticEquationSolver
      */
     public function solve(float $a, float $b, float $c): array
     {
+        if (is_finite($a) === false || is_finite($b) === false || is_finite($c) === false) {
+            throw new TypeError('Аргументы не могут принимать значения NAN и INF');
+        }
+
         if (abs($a) < PHP_FLOAT_EPSILON) {
             throw new RuntimeException('а не может быть равно 0');
         }
