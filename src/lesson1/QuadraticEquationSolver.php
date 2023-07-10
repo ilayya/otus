@@ -29,9 +29,7 @@ class QuadraticEquationSolver
 
         if (abs($d) < PHP_FLOAT_EPSILON) {
             $solutions[] = -$b / 2 * $a;
-        }
-
-        if ($d > 0) {
+        } elseif ($d > 0) {
             $solutions[] = (-$b + sqrt($d)) / (2 * $a);
             $solutions[] = (-$b - sqrt($d)) / (2 * $a);
         }
