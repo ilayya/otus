@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 class Lesson1Test extends TestCase
 {
     /**
-     * Написать тест, который проверяет, что для уравнения x^2+1 = 0 корней нет (возвращается пустой массив)
+     * Тест, который проверяет, что для уравнения x^2+1 = 0 корней нет,
      *
      * php -d memory_limit=2048M vendor/phpunit/phpunit/phpunit src/tests/Lesson1Test.php
      * @return void
@@ -20,7 +20,7 @@ class Lesson1Test extends TestCase
     }
 
     /**
-     * Написать тест, который проверяет, что для уравнения x^2-1 = 0 есть два корня кратности 1 (x1=1, x2=-1)
+     * Тест, который проверяет, что для уравнения x^2-1 = 0 есть два корня кратности 1
      *
      * @return void
      */
@@ -56,6 +56,62 @@ class Lesson1Test extends TestCase
     {
         $this->expectException(RuntimeException::class);
 
-        (new QuadraticEquationSolver())->solve(0, 1, 1);
+        (new QuadraticEquationSolver())->solve(0.0, 1, 1);
+    }
+
+    /**
+     * a - половина от эпсилона
+     *
+     * @return void
+     */
+    public function testFive(): void
+    {
+        $this->expectException(RuntimeException::class);
+
+        $a = PHP_FLOAT_EPSILON / 2;
+
+        (new QuadraticEquationSolver())->solve($a, 1, 1);
+    }
+
+    public function testSix(): void
+    {
+        $this->expectException(TypeError::class);
+
+       (new QuadraticEquationSolver())->solve(INF, 1, 0);
+    }
+
+    public function testSeven(): void
+    {
+        $this->expectException(TypeError::class);
+
+       (new QuadraticEquationSolver())->solve(NAN, 1, 0);
+    }
+
+    public function testEight(): void
+    {
+        $this->expectException(TypeError::class);
+
+       (new QuadraticEquationSolver())->solve(1, INF, 0);
+    }
+
+    public function testNine(): void
+    {
+        $this->expectException(TypeError::class);
+
+       (new QuadraticEquationSolver())->solve(1, NAN, 0);
+    }
+
+    public function testTen(): void
+    {
+        $this->expectException(TypeError::class);
+
+        (new QuadraticEquationSolver())->solve(1, 1, INF);
+    }
+
+    public function testEleven(): void
+    {
+        $this->expectException(TypeError::class);
+
+        (new QuadraticEquationSolver())->solve(1, 1, NAN);
     }
 }
