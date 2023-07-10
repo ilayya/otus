@@ -5,8 +5,6 @@ on: [push]
 jobs:
   phpunit:
     runs-on: ubuntu-latest
-    container:
-      image: php:8.1-apache
 
     steps:
       - uses: actions/checkout@v2
