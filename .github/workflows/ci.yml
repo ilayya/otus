@@ -14,4 +14,4 @@ jobs:
           command: install
           only_args: --prefer-dist --no-scripts -q -o
       - name: Run Testsuite
-        run: vendor/phpunit/phpunit/phpunit src/tests/
+        run: vendor/phpunit/phpunit/phpunit src/tests/ --do-not-cache-result
