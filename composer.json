@@ -3,6 +3,7 @@
     "autoload": {
         "classmap": [
             "src/lesson1",
+            "src/lesson3",
             "src/tests"
         ],
         "psr-4": {
